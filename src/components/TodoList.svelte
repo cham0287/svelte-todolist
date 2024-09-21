@@ -11,13 +11,39 @@
     { id: 3, text: "코딩 공부하기", completed: false },
     { id: 4, text: "책 읽기", completed: false },
   ];
+
+  const toggleTodo = (id: number) => {
+    todos = todos.map(todo => 
+      todo.id === id ? {...todo, completed: !todo.completed} : todo
+    );
+  }
 </script>
 
 <div>
   <h1>Svelte Todo List</h1>
   <ul>
     {#each todos as todo (todo.id)}
-    <li>{todo.text}</li>
+    <li>
+      <input
+        type="checkbox"
+        checked={todo.completed}
+        on:change={() => toggleTodo(todo.id)}
+      />
+      <span class:completed={todo.completed}>
+        {todo.text}
+      </span>
+    </li>
     {/each}
   </ul>
 </div>
+
+<style>
+  .completed {
+    text-decoration: line-through;
+  }
+  li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+</style>
