@@ -12,10 +12,8 @@
     { id: 4, text: "책 읽기", completed: false },
   ];
 
-  const toggleTodo = (id: number) => {
-    todos = todos.map(todo => 
-      todo.id === id ? {...todo, completed: !todo.completed} : todo
-    );
+  const toggleTodo = (todo: Todo) => {
+    todo.completed = !todo.completed;
   }
 </script>
 
@@ -27,7 +25,7 @@
       <input
         type="checkbox"
         checked={todo.completed}
-        on:change={() => toggleTodo(todo.id)}
+        on:change={() => toggleTodo(todo)}
       />
       <span class:completed={todo.completed}>
         {todo.text}
